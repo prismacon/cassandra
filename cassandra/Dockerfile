@@ -31,9 +31,14 @@ RUN mkdir -p /var/log/supervisor
 # Deploy startup script
 ADD src/start.sh /usr/local/bin/start
 
+# Deploy seed script
+ADD src/seed.sh /usr/local/bin/seed
+
 # Necessary since cassandra is trying to override the system limitations
 # See https://groups.google.com/forum/#!msg/docker-dev/8TM_jLGpRKU/dewIQhcs7oAJ
 RUN rm -f /etc/security/limits.d/cassandra.conf
+
+ADD db /db-data
 
 EXPOSE 7199 7000 7001 9160 9042
 EXPOSE 22 8012 61621
